@@ -244,4 +244,11 @@
     <string name="config_systemTextIntelligence">com.google.android.as</string>
     <string name="config_systemUiIntelligence">com.google.android.as</string>
     <string name="config_systemVisualIntelligence">com.google.android.as</string>
+
+    <!-- Minimum color temperature, in Kelvin, supported by Night display. -->
+    <integer name="config_nightDisplayColorTemperatureMin">1600</integer>
+
+    <!-- Default color temperature, in Kelvin, to tint the screen when Night display is
+         activated. -->
+    <integer name="config_nightDisplayColorTemperatureDefault">2650</integer>
 </resources>
