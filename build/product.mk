@@ -91,7 +91,7 @@ PRODUCT_PACKAGES += \
 # Gapps
 ifeq ($(WITH_GMS),true)
 
-$(call inherit-product, vendor/gapps/common/common-vendor.mk)
+$(call inherit-product, vendor/gms/products/gms.mk)
 
 # SetupWizard and Google Assistant properties
 PRODUCT_PRODUCT_PROPERTIES += \
