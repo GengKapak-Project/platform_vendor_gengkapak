@@ -1,6 +1,7 @@
 #
 # Copyright (C) 2016 The CyanogenMod Project
 #               2017-2019 The LineageOS Project
+#               2021 The GengKapak Project
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -16,7 +17,7 @@
 #
 
 ifeq ($(TARGET_BOOTANIMATION),)
-    TARGET_BOOTANIMATION := vendor/proton/bootanimation/bootanimation.zip
+    TARGET_BOOTANIMATION := vendor/gengkapak/bootanimation/bootanimation.zip
 endif
 
 include $(CLEAR_VARS)

@@ -12,15 +12,15 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-$(call inherit-product, vendor/proton/build/apps.mk)
+$(call inherit-product, vendor/gengkapak/build/apps.mk)
 
 # Inherit vendor submodules
-$(call inherit-product, vendor/proton/bootanimation/bootanimation.mk)
-$(call inherit-product, vendor/proton/fonts/fonts.mk)
-$(call inherit-product, vendor/proton/overlay/overlay.mk)
-$(call inherit-product, vendor/proton/telephony/telephony.mk)
-$(call inherit-product, vendor/proton/audio/audio.mk)
-$(call inherit-product-if-exists, vendor/proton/signing/dev.mk)
+$(call inherit-product, vendor/gengkapak/bootanimation/bootanimation.mk)
+$(call inherit-product, vendor/gengkapak/fonts/fonts.mk)
+$(call inherit-product, vendor/gengkapak/overlay/overlay.mk)
+$(call inherit-product, vendor/gengkapak/telephony/telephony.mk)
+$(call inherit-product, vendor/gengkapak/audio/audio.mk)
+$(call inherit-product-if-exists, vendor/gengkapak/signing/dev.mk)
 
 # Flatten APEXs for performance
 OVERRIDE_TARGET_FLATTEN_APEX := true

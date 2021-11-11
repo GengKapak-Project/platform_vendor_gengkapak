@@ -1,4 +1,5 @@
 # Copyright (C) 2020 The Proton AOSP Project
+# Copyright (C) 2021 The GengKapak Project
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -12,7 +13,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-CUSTOM_ROM_VERSION := 12.0.0
+CUSTOM_ROM_VERSION := 12.0
 
 ADDITIONAL_SYSTEM_PROPERTIES += \
     ro.build.version.custom=$(CUSTOM_ROM_VERSION)

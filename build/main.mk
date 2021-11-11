@@ -13,10 +13,10 @@
 # limitations under the License.
 
 # Custom ROM version
--include vendor/proton/version.mk
+-include vendor/gengkapak/version.mk
 
 # Signing
--include vendor/proton/signing/keys.mk
+-include vendor/gengkapak/signing/keys.mk
 
 # Override fingerprint for Google Play Services and SafetyNet
 ifneq ($(PRODUCT_OVERRIDE_FINGERPRINT),)

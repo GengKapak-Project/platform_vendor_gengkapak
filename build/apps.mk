@@ -12,7 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-$(call inherit-product, vendor/proton/themes/themes.mk)
+$(call inherit-product, vendor/gengkapak/themes/themes.mk)
 
 # LineageOS apps
 PRODUCT_PACKAGES += \
@@ -26,7 +26,3 @@ PRODUCT_PACKAGES += \
 # Config
 PRODUCT_PACKAGES += \
     SimpleDeviceConfig \
-
-# Wallpapers
-PRODUCT_PACKAGES += \
-    ProtonWallpaperStub \
