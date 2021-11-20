@@ -14,4 +14,4 @@
 # limitations under the License.
 
 # Rules for QCOM targets
-include $(TOPDIR)vendor/halcyon/build/core/qcom_target.mk
+include $(TOPDIR)vendor/gengkapak/build/core/qcom_target.mk

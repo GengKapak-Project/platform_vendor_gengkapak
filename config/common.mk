@@ -1,7 +1,7 @@
 # Allow vendor/extra to override any property by setting it first
 $(call inherit-product-if-exists, vendor/extra/product.mk)
 
-PRODUCT_BRAND ?= halcyon
+PRODUCT_BRAND ?= gengkapak
 
 PRODUCT_SIZE := full
 
@@ -28,15 +28,15 @@ endif
 
 # Backup Tool
 PRODUCT_COPY_FILES += \
-    vendor/halcyon/prebuilt/common/bin/backuptool.sh:install/bin/backuptool.sh \
-    vendor/halcyon/prebuilt/common/bin/backuptool.functions:install/bin/backuptool.functions \
-    vendor/halcyon/prebuilt/common/bin/50-halcyon.sh:$(TARGET_COPY_OUT_SYSTEM)/addon.d/50-halcyon.sh
+    vendor/gengkapak/prebuilt/common/bin/backuptool.sh:install/bin/backuptool.sh \
+    vendor/gengkapak/prebuilt/common/bin/backuptool.functions:install/bin/backuptool.functions \
+    vendor/gengkapak/prebuilt/common/bin/50-gengkapak.sh:$(TARGET_COPY_OUT_SYSTEM)/addon.d/50-gengkapak.sh
 
 ifneq ($(strip $(AB_OTA_PARTITIONS) $(AB_OTA_POSTINSTALL_CONFIG)),)
 PRODUCT_COPY_FILES += \
-    vendor/halcyon/prebuilt/common/bin/backuptool_ab.sh:$(TARGET_COPY_OUT_SYSTEM)/bin/backuptool_ab.sh \
-    vendor/halcyon/prebuilt/common/bin/backuptool_ab.functions:$(TARGET_COPY_OUT_SYSTEM)/bin/backuptool_ab.functions \
-    vendor/halcyon/prebuilt/common/bin/backuptool_postinstall.sh:$(TARGET_COPY_OUT_SYSTEM)/bin/backuptool_postinstall.sh
+    vendor/gengkapak/prebuilt/common/bin/backuptool_ab.sh:$(TARGET_COPY_OUT_SYSTEM)/bin/backuptool_ab.sh \
+    vendor/gengkapak/prebuilt/common/bin/backuptool_ab.functions:$(TARGET_COPY_OUT_SYSTEM)/bin/backuptool_ab.functions \
+    vendor/gengkapak/prebuilt/common/bin/backuptool_postinstall.sh:$(TARGET_COPY_OUT_SYSTEM)/bin/backuptool_postinstall.sh
 ifneq ($(TARGET_BUILD_VARIANT),user)
 PRODUCT_SYSTEM_DEFAULT_PROPERTIES += \
     ro.ota.allow_downgrade=true
@@ -45,15 +45,15 @@ endif
 
 # Backup Services whitelist
 PRODUCT_COPY_FILES += \
-    vendor/halcyon/config/permissions/backup.xml:$(TARGET_COPY_OUT_SYSTEM)/etc/sysconfig/backup.xml
+    vendor/gengkapak/config/permissions/backup.xml:$(TARGET_COPY_OUT_SYSTEM)/etc/sysconfig/backup.xml
 
 # Copy all Lineage-specific init rc files
-$(foreach f,$(wildcard vendor/halcyon/prebuilt/common/etc/init/*.rc),\
+$(foreach f,$(wildcard vendor/gengkapak/prebuilt/common/etc/init/*.rc),\
 	$(eval PRODUCT_COPY_FILES += $(f):$(TARGET_COPY_OUT_SYSTEM)/etc/init/$(notdir $f)))
 
 # Enable Android Beam on all targets
 PRODUCT_COPY_FILES += \
-    vendor/halcyon/config/permissions/android.software.nfc.beam.xml:$(TARGET_COPY_OUT_SYSTEM)/etc/permissions/android.software.nfc.beam.xml
+    vendor/gengkapak/config/permissions/android.software.nfc.beam.xml:$(TARGET_COPY_OUT_SYSTEM)/etc/permissions/android.software.nfc.beam.xml
 
 # Enable SIP+VoIP on all targets
 PRODUCT_COPY_FILES += \
@@ -105,15 +105,15 @@ PRODUCT_PRODUCT_PROPERTIES += \
     ro.support_one_handed_mode=true
 
 # Overlays
-PRODUCT_PACKAGE_OVERLAYS += vendor/halcyon/overlay/dictionaries
-PRODUCT_ENFORCE_RRO_EXCLUDED_OVERLAYS += vendor/halcyon/overlay
-PRODUCT_PACKAGE_OVERLAYS += vendor/halcyon/overlay/common
+PRODUCT_PACKAGE_OVERLAYS += vendor/gengkapak/overlay/dictionaries
+PRODUCT_ENFORCE_RRO_EXCLUDED_OVERLAYS += vendor/gengkapak/overlay
+PRODUCT_PACKAGE_OVERLAYS += vendor/gengkapak/overlay/common
 
 # Include other common configs
-include vendor/halcyon/config/aosp_audio.mk
-include vendor/halcyon/config/halcyon_audio.mk
-include vendor/halcyon/config/packages.mk
-include vendor/halcyon/config/version.mk
+include vendor/gengkapak/config/aosp_audio.mk
+include vendor/gengkapak/config/gengkapak_audio.mk
+include vendor/gengkapak/config/packages.mk
+include vendor/gengkapak/config/version.mk
 
-# Include halcyonUI
-include vendor/halcyonui/config.mk
+# Include gengkapakUI
+include vendor/gengkapakui/config.mk

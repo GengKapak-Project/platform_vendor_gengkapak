@@ -2,9 +2,9 @@
 # Lineage Audio Files
 #
 
-ALARM_PATH := vendor/halcyon/prebuilt/common/media/audio/alarms
-NOTIFICATION_PATH := vendor/halcyon/prebuilt/common/media/audio/notifications
-RINGTONE_PATH := vendor/halcyon/prebuilt/common/media/audio/ringtones
+ALARM_PATH := vendor/gengkapak/prebuilt/common/media/audio/alarms
+NOTIFICATION_PATH := vendor/gengkapak/prebuilt/common/media/audio/notifications
+RINGTONE_PATH := vendor/gengkapak/prebuilt/common/media/audio/ringtones
 
 # Alarms
 PRODUCT_COPY_FILES += \

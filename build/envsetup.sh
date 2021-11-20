@@ -1,13 +1,13 @@
-function __print_halcyon_functions_help() {
+function __print_gengkapak_functions_help() {
 cat <<EOF
 Additional LineageOS functions:
 - cout:            Changes directory to out.
 - mmp:             Builds all of the modules in the current directory and pushes them to the device.
 - mmap:            Builds all of the modules in the current directory and its dependencies, then pushes the package to the device.
 - mmmp:            Builds all of the modules in the supplied directories and pushes them to the device.
-- halcyongerrit:   A Git wrapper that fetches/pushes patch from/to LineageOS Gerrit Review.
-- halcyonrebase:   Rebase a Gerrit change and push it again.
-- halcyonremote:   Add git remote for LineageOS Gerrit Review.
+- gengkapakgerrit:   A Git wrapper that fetches/pushes patch from/to LineageOS Gerrit Review.
+- gengkapakrebase:   Rebase a Gerrit change and push it again.
+- gengkapakremote:   Add git remote for LineageOS Gerrit Review.
 - aospremote:      Add git remote for matching AOSP repository.
 - cafremote:       Add git remote for matching CodeAurora repository.
 - githubremote:    Add git remote for LineageOS Github.
@@ -82,7 +82,7 @@ function breakfast()
                 variant="userdebug"
             fi
 
-            lunch halcyon_$target-$variant
+            lunch gengkapak_$target-$variant
         fi
     fi
     return $?
@@ -93,7 +93,7 @@ alias bib=breakfast
 function eat()
 {
     if [ "$OUT" ] ; then
-        ZIPPATH=`ls -tr "$OUT"/halcyon-*.zip | tail -1`
+        ZIPPATH=`ls -tr "$OUT"/gengkapak-*.zip | tail -1`
         if [ ! -f $ZIPPATH ] ; then
             echo "Nothing to eat"
             return 1
@@ -101,13 +101,13 @@ function eat()
         echo "Waiting for device..."
         adb wait-for-device-recovery
         echo "Found device"
-        if (adb shell getprop ro.halcyon.device | grep -q "$halcyon_BUILD"); then
+        if (adb shell getprop ro.gengkapak.device | grep -q "$gengkapak_BUILD"); then
             echo "Rebooting to sideload for install"
             adb reboot sideload-auto-reboot
             adb wait-for-sideload
             adb sideload $ZIPPATH
         else
-            echo "The connected device does not appear to be $halcyon_BUILD, run away!"
+            echo "The connected device does not appear to be $gengkapak_BUILD, run away!"
         fi
         return $?
     else
@@ -231,28 +231,28 @@ function dddclient()
    fi
 }
 
-function halcyonremote()
+function gengkapakremote()
 {
     if ! git rev-parse --git-dir &> /dev/null
     then
         echo ".git directory not found. Please run this from the root directory of the Android repository you wish to set up."
         return 1
     fi
-    git remote rm halcyon 2> /dev/null
+    git remote rm gengkapak 2> /dev/null
     local REMOTE=$(git config --get remote.github.projectname)
-    local HALCYON="true"
+    local GENGKAPAK="true"
     if [ -z "$REMOTE" ]
     then
         REMOTE=$(git config --get remote.aosp.projectname)
-        HALCYON="false"
+        GENGKAPAK="false"
     fi
     if [ -z "$REMOTE" ]
     then
         REMOTE=$(git config --get remote.caf.projectname)
-        HALCYON="false"
+        GENGKAPAK="false"
     fi
 
-    if [ $HALCYON = "false" ]
+    if [ $GENGKAPAK = "false" ]
     then
         local PROJECT=$(echo $REMOTE | sed -e "s#platform/#android/#g; s#/#_#g")
         local PFX="LineageOS/"
@@ -260,14 +260,14 @@ function halcyonremote()
         local PROJECT=$REMOTE
     fi
 
-    local halcyon_USER=$(git config --get review.review.halcyonos.org.username)
-    if [ -z "$halcyon_USER" ]
+    local gengkapak_USER=$(git config --get review.review.gengkapakos.org.username)
+    if [ -z "$gengkapak_USER" ]
     then
-        git remote add halcyon ssh://review.halcyonos.org:29418/$PFX$PROJECT
+        git remote add gengkapak ssh://review.gengkapakos.org:29418/$PFX$PROJECT
     else
-        git remote add halcyon ssh://$halcyon_USER@review.halcyonos.org:29418/$PFX$PROJECT
+        git remote add gengkapak ssh://$gengkapak_USER@review.gengkapakos.org:29418/$PFX$PROJECT
     fi
-    echo "Remote 'halcyon' created"
+    echo "Remote 'gengkapak' created"
 }
 
 function aospremote()
@@ -366,14 +366,14 @@ function installboot()
     adb wait-for-device-recovery
     adb root
     adb wait-for-device-recovery
-    if (adb shell getprop ro.halcyon.device | grep -q "$halcyon_BUILD");
+    if (adb shell getprop ro.gengkapak.device | grep -q "$gengkapak_BUILD");
     then
         adb push $OUT/boot.img /cache/
         adb shell dd if=/cache/boot.img of=$PARTITION
         adb shell rm -rf /cache/boot.img
         echo "Installation complete."
     else
-        echo "The connected device does not appear to be $halcyon_BUILD, run away!"
+        echo "The connected device does not appear to be $gengkapak_BUILD, run away!"
     fi
 }
 
@@ -404,14 +404,14 @@ function installrecovery()
     adb wait-for-device-recovery
     adb root
     adb wait-for-device-recovery
-    if (adb shell getprop ro.halcyon.device | grep -q "$halcyon_BUILD");
+    if (adb shell getprop ro.gengkapak.device | grep -q "$gengkapak_BUILD");
     then
         adb push $OUT/recovery.img /cache/
         adb shell dd if=/cache/recovery.img of=$PARTITION
         adb shell rm -rf /cache/recovery.img
         echo "Installation complete."
     else
-        echo "The connected device does not appear to be $halcyon_BUILD, run away!"
+        echo "The connected device does not appear to be $gengkapak_BUILD, run away!"
     fi
 }
 
@@ -431,13 +431,13 @@ function makerecipe() {
     if [ "$REPO_REMOTE" = "github" ]
     then
         pwd
-        halcyonremote
-        git push halcyon HEAD:refs/heads/'$1'
+        gengkapakremote
+        git push gengkapak HEAD:refs/heads/'$1'
     fi
     '
 }
 
-function halcyongerrit() {
+function gengkapakgerrit() {
     if [ "$(basename $SHELL)" = "zsh" ]; then
         # zsh does not define FUNCNAME, derive from funcstack
         local FUNCNAME=$funcstack[1]
@@ -447,7 +447,7 @@ function halcyongerrit() {
         $FUNCNAME help
         return 1
     fi
-    local user=`git config --get review.review.halcyonos.org.username`
+    local user=`git config --get review.review.gengkapakos.org.username`
     local review=`git config --get remote.github.review`
     local project=`git config --get remote.github.projectname`
     local command=$1
@@ -483,7 +483,7 @@ EOF
             case $1 in
                 __cmg_*) echo "For internal use only." ;;
                 changes|for)
-                    if [ "$FUNCNAME" = "halcyongerrit" ]; then
+                    if [ "$FUNCNAME" = "gengkapakgerrit" ]; then
                         echo "'$FUNCNAME $1' is deprecated."
                     fi
                     ;;
@@ -576,7 +576,7 @@ EOF
                 ${local_branch}:refs/for/$remote_branch || return 1
             ;;
         changes|for)
-            if [ "$FUNCNAME" = "halcyongerrit" ]; then
+            if [ "$FUNCNAME" = "gengkapakgerrit" ]; then
                 echo >&2 "'$FUNCNAME $command' is deprecated."
             fi
             ;;
@@ -675,7 +675,7 @@ EOF
     esac
 }
 
-function halcyonrebase() {
+function gengkapakrebase() {
     local repo=$1
     local refs=$2
     local pwd="$(pwd)"
@@ -683,7 +683,7 @@ function halcyonrebase() {
 
     if [ -z $repo ] || [ -z $refs ]; then
         echo "LineageOS Gerrit Rebase Usage: "
-        echo "      halcyonrebase <path to project> <patch IDs on Gerrit>"
+        echo "      gengkapakrebase <path to project> <patch IDs on Gerrit>"
         echo "      The patch IDs appear on the Gerrit commands that are offered."
         echo "      They consist on a series of numbers and slashes, after the text"
         echo "      refs/changes. For example, the ID in the following command is 26/8126/2"
@@ -704,7 +704,7 @@ function halcyonrebase() {
     echo "Bringing it up to date..."
     repo sync .
     echo "Fetching change..."
-    git fetch "http://review.halcyonos.org/p/$repo" "refs/changes/$refs" && git cherry-pick FETCH_HEAD
+    git fetch "http://review.gengkapakos.org/p/$repo" "refs/changes/$refs" && git cherry-pick FETCH_HEAD
     if [ "$?" != "0" ]; then
         echo "Error cherry-picking. Not uploading!"
         return
@@ -788,7 +788,7 @@ function dopush()
         echo "Device Found."
     fi
 
-    if (adb shell getprop ro.halcyon.device | grep -q "$halcyon_BUILD") || [ "$FORCE_PUSH" = "true" ];
+    if (adb shell getprop ro.gengkapak.device | grep -q "$gengkapak_BUILD") || [ "$FORCE_PUSH" = "true" ];
     then
     # retrieve IP and PORT info if we're using a TCP connection
     TCPIPPORT=$(adb devices \
@@ -907,7 +907,7 @@ EOF
     rm -f $OUT/.log
     return 0
     else
-        echo "The connected device does not appear to be $halcyon_BUILD, run away!"
+        echo "The connected device does not appear to be $gengkapak_BUILD, run away!"
     fi
 }
 
@@ -920,14 +920,14 @@ alias cmkap='dopush cmka'
 
 function repopick() {
     T=$(gettop)
-    $T/vendor/halcyon/build/tools/repopick.py $@
+    $T/vendor/gengkapak/build/tools/repopick.py $@
 }
 
 function fixup_common_out_dir() {
     common_out_dir=$(get_build_var OUT_DIR)/target/common
     target_device=$(get_build_var TARGET_DEVICE)
     common_target_out=common-${target_device}
-    if [ ! -z $halcyon_FIXUP_COMMON_OUT ]; then
+    if [ ! -z $gengkapak_FIXUP_COMMON_OUT ]; then
         if [ -d ${common_out_dir} ] && [ ! -L ${common_out_dir} ]; then
             mv ${common_out_dir} ${common_out_dir}-${target_device}
             ln -s ${common_target_out} ${common_out_dir}

@@ -15,18 +15,16 @@
 # limitations under the License.
 #
 
-HALCYON_HOST_TIME := $(shell date +"%Y%m%d-%H%M")
+GENGKAPAK_HOST_TIME := $(shell date +"%Y%m%d-%H%M")
 
-ifndef HALCYON_BUILD_TYPE
-   HALCYON_BUILD_TYPE := UNOFFICIAL
+ifndef GENGKAPAK_BUILD_TYPE
+   GENGKAPAK_BUILD_TYPE := UNOFFICIAL
 endif
 
-HALCYON_VERSION := 1.0
-HALCYON_BUILD_VERSION := halcyon-$(HALCYON_VERSION)-$(HALCYON_BUILD)-$(HALCYON_HOST_TIME)-$(HALCYON_BUILD_TYPE)
-HALCYON_BUILD_NUMBER := hlcyn-$(HALCYON_VERSION).$(HALCYON_HOST_TIME)
+GENGKAPAK_VERSION := 1.0
+GENGKAPAK_BUILD_VERSION := Gengkapak-$(GENGKAPAK_VERSION)-$(GENGKAPAK_BUILD)-$(GENGKAPAK_HOST_TIME)-$(GENGKAPAK_BUILD_TYPE)
 
 PRODUCT_SYSTEM_DEFAULT_PROPERTIES += \
-   ro.halcyon.version=$(HALCYON_VERSION) \
-   ro.halcyon.build.version=$(HALCYON_BUILD_VERSION) \
-   ro.halcyon.build.number=$(HALCYON_BUILD_NUMBER) \
-   ro.halcyon.build.type=$(HALCYON_BUILD_TYPE)
+   ro.gengkapak.version=$(GENGKAPAK_VERSION) \
+   ro.gengkapak.build.version=$(GENGKAPAK_BUILD_VERSION) \
+   ro.gengkapak.build.type=$(GENGKAPAK_BUILD_TYPE)
