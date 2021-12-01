@@ -117,3 +117,9 @@ include vendor/gengkapak/config/version.mk
 
 # Include gengkapakUI
 include vendor/gengkapakui/config.mk
+
+# GApps Flag
+ifeq ($(WITH_GAPPS), true)
+# Call Gapps
+$(call inherit-product, vendor/gapps/products/gms.mk)
+endif #WITH_GAPPS
