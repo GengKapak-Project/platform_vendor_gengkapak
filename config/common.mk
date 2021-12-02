@@ -121,5 +121,5 @@ include vendor/gengkapakui/config.mk
 # GApps Flag
 ifeq ($(WITH_GAPPS), true)
 # Call Gapps
-$(call inherit-product, vendor/gapps/products/gms.mk)
+$(call inherit-product, vendor/gms/products/gms.mk)
 endif #WITH_GAPPS
