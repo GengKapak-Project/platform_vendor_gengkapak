@@ -1,6 +1,7 @@
 #
 # Copyright (C) 2019-2021 The ConquerOS Project
 #           (C) 2021 hlcynprjct!
+#           (C) 2021-2022 GengKapak-Project
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -23,9 +24,9 @@ endif
 
 GENGKAPAK_VERSION := SLAV
 ifeq ($(WITH_GAPPS),true)
-GENGKAPAK_BUILD_VERSION := Gengkapak-$(GENGKAPAK_VERSION)-$(GENGKAPAK_BUILD)-$(GENGKAPAK_HOST_TIME)-$(GENGKAPAK_BUILD_TYPE)-gapps
+GENGKAPAK_BUILD_VERSION := GengKapak-$(GENGKAPAK_VERSION)-$(GENGKAPAK_BUILD)-$(GENGKAPAK_HOST_TIME)-$(GENGKAPAK_BUILD_TYPE)-gapps
 else
-GENGKAPAK_BUILD_VERSION := Gengkapak-$(GENGKAPAK_VERSION)-$(GENGKAPAK_BUILD)-$(GENGKAPAK_HOST_TIME)-$(GENGKAPAK_BUILD_TYPE)-vanilla
+GENGKAPAK_BUILD_VERSION := GengKapak-$(GENGKAPAK_VERSION)-$(GENGKAPAK_BUILD)-$(GENGKAPAK_HOST_TIME)-$(GENGKAPAK_BUILD_TYPE)-vanilla
 endif
 
 PRODUCT_SYSTEM_DEFAULT_PROPERTIES += \
